@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Search(props) {
-  const { submitSearch } = props;
+  const { submitSearch, tweets } = props;
 
   const onSearchSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +17,14 @@ function Search(props) {
     }
   }
 
+  const tweetList = tweets.map(tweet => {
+    return (
+      <div>
+        <p>{tweet.text}</p>
+      </div>
+    )
+  })
+
   return (
     <div className="Search">
       <form onSubmit={onSearchSubmit}>
@@ -30,6 +38,7 @@ function Search(props) {
           type="submit"
           value="Submit"
         />
+        {tweetList}
       </form>
     </div>
   );

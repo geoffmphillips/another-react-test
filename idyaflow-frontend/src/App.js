@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import TwitterLogin from 'react-twitter-auth';
 import './App.css';
 
@@ -10,20 +11,20 @@ class App extends Component {
       tweets: [],
     }
 
-    this.onFailed = this.onFailed.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
   }
 
-  submitSearch(event) {
-    axios.post('twitterapi')
+  submitSearch(searchTerm) {
+    axios.post(process.env.API_URL, {
+      query: searchTerm,
+    })
       .then(response => {
         this.setState(() => {
           return {tweets: response.data};
         })
       })
       .catch(error => {
-        do something;
+        console.log(error);
       })
     }
   }
